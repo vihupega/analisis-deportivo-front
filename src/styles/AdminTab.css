@@ -1,0 +1,99 @@
+/* ── Admin panel ───────────────────────────────────────── */
+.admin-section + .admin-section {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.collect-seasons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.season-tag {
+  background: rgba(15,22,40,0.6);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-1);
+}
+.season-tag button {
+  background: none;
+  border: none;
+  color: var(--ink-3);
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0;
+}
+.season-tag button:hover { color: var(--c-bad); }
+
+.toggle-group {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.toggle-btn {
+  flex: 1;
+  padding: 9px;
+  border: none;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+}
+.toggle-btn.active { background: var(--c-club); color: #001520; }
+.toggle-btn.active.intl { background: var(--c-intl); color: #1a0800; }
+
+.job-status {
+  margin-top: 16px;
+  background: rgba(5, 7, 13, 0.6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-size: 0.8rem;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+}
+.job-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--line-faint);
+  gap: 12px;
+}
+.job-row:last-child { border-bottom: none; }
+.job-status-badge { font-weight: 700; }
+.status-running { color: var(--c-warn); }
+.status-done    { color: var(--c-ok); }
+.status-error   { color: var(--c-bad); }
+
+.train-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.train-card {
+  background: rgba(8,12,22,0.5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.train-card h4 { font-size: 0.9rem; color: var(--ink-0); }
+.train-card p  { font-size: 0.78rem; color: var(--ink-3); line-height: 1.5; }

@@ -1,0 +1,80 @@
+/* ── Probability result ────────────────────────────────── */
+.prob-result {
+  background: linear-gradient(180deg, rgba(20,28,50,0.6), rgba(12,17,32,0.7));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.prob-result::before,
+.prob-result::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--c-accent);
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+}
+.prob-result::before { top: -1px; left: -1px; border-top-width: 1.5px; border-left-width: 1.5px; }
+.prob-result::after  { bottom: -1px; right: -1px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+.prob-teams {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: var(--ink-0);
+}
+.prob-teams .league-label {
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  font-weight: 400;
+  display: block;
+  margin-top: 5px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.prob-bars { display: flex; flex-direction: column; gap: 14px; }
+.prob-row  { display: grid; grid-template-columns: 90px 1fr 56px; align-items: center; gap: 10px; }
+.prob-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-align: right;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.prob-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  height: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line-faint);
+}
+.prob-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(.4,0,.2,1);
+}
+.prob-fill.home { background: linear-gradient(90deg, var(--c-fix-deep), var(--c-ok)); }
+.prob-fill.draw { background: linear-gradient(90deg, #c49a00, var(--c-warn)); }
+.prob-fill.away { background: linear-gradient(90deg, #a01020, var(--c-bad)); }
+
+.prob-pct {
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.prob-pct.home { color: var(--c-ok); }
+.prob-pct.draw { color: var(--c-warn); }
+.prob-pct.away { color: var(--c-bad); }
