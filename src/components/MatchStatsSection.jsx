@@ -31,17 +31,28 @@ export function StatDualBar({ label, homeVal, awayVal, fillType = 'home' }) {
   )
 }
 
+const hasVal = (v) => v !== null && v !== undefined
+
 export default function MatchStatsSection({ stats, homeTeam, awayTeam, compact = false }) {
   if (!stats) return null
+
   const trim = (s, n = 10) => s.length > n ? s.slice(0, n - 1) + '…' : s
   const fmt2 = (v) => (v ?? 0).toFixed(2)
+
+  const hasXG     = hasVal(stats.home_xg) || hasVal(stats.away_xg)
+  const hasFouls  = hasVal(stats.home_fouls_avg_l5)    && hasVal(stats.away_fouls_avg_l5)
+  const hasCards  = hasVal(stats.home_yellow_cards_l5) && hasVal(stats.away_yellow_cards_l5)
+  const hasCorners= hasVal(stats.home_corners_avg_l5)  && hasVal(stats.away_corners_avg_l5)
+  const hasCompare= hasFouls || hasCards || hasCorners
+
+  if (!hasXG && !hasCompare) return null
 
   return (
     <div>
       {!compact && <div className="stats-divider" />}
       {!compact && <div className="eyebrow" style={{ marginBottom: 14 }}>Estadísticas esperadas</div>}
 
-      {compact
+      {hasXG && (compact
         ? (
           <div className="xg-compact">
             <span className="xg-compact-val text-ok">{fmt2(stats.home_xg)}</span>
@@ -73,20 +84,22 @@ export default function MatchStatsSection({ stats, homeTeam, awayTeam, compact =
             </div>
           </div>
         )
-      }
+      )}
 
-      <div className="stats-compare">
-        {!compact && (
-          <div className="stats-compare-header">
-            <span className="stat-header-home">{trim(homeTeam)}</span>
-            <span />
-            <span className="stat-header-away">{trim(awayTeam)}</span>
-          </div>
-        )}
-        <StatDualBar label="Faltas"    homeVal={stats.home_fouls_avg_l5}    awayVal={stats.away_fouls_avg_l5}    />
-        <StatDualBar label="Amarillas" homeVal={stats.home_yellow_cards_l5} awayVal={stats.away_yellow_cards_l5} fillType="warn" />
-        <StatDualBar label="Corners"   homeVal={stats.home_corners_avg_l5}  awayVal={stats.away_corners_avg_l5}  />
-      </div>
+      {hasCompare && (
+        <div className="stats-compare">
+          {!compact && (
+            <div className="stats-compare-header">
+              <span className="stat-header-home">{trim(homeTeam)}</span>
+              <span />
+              <span className="stat-header-away">{trim(awayTeam)}</span>
+            </div>
+          )}
+          {hasFouls   && <StatDualBar label="Faltas"    homeVal={stats.home_fouls_avg_l5}    awayVal={stats.away_fouls_avg_l5}    />}
+          {hasCards   && <StatDualBar label="Amarillas" homeVal={stats.home_yellow_cards_l5} awayVal={stats.away_yellow_cards_l5} fillType="warn" />}
+          {hasCorners && <StatDualBar label="Corners"   homeVal={stats.home_corners_avg_l5}  awayVal={stats.away_corners_avg_l5}  />}
+        </div>
+      )}
     </div>
   )
 }
