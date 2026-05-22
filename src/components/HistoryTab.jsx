@@ -209,6 +209,12 @@ function PredictionCard({ prediction: p, onDelete }) {
   const actualRes  = p.actual_result                    ?? null
   const modelType  = p.model_type ?? ''
 
+  const analysis     = p.match_analysis        ?? {}
+  const isCloseMatch = analysis.is_close_match ?? false
+  const drawIsViable = analysis.draw_is_viable ?? false
+  const closeWarning = (p.warnings ?? []).find(w => w.type === 'close_match')
+  const notes        = p.informational_notes   ?? []
+
   const [showStats,    setShowStats]    = useState(false)
   const [deleteStage,  setDeleteStage]  = useState(0)
   const hasStats = !!p.match_stats
@@ -221,6 +227,11 @@ function PredictionCard({ prediction: p, onDelete }) {
             <span className="team-name">{p.home_team}</span>
             <span className="vs">vs</span>
             <span className="team-name">{p.away_team}</span>
+            {isCloseMatch && (
+              <span className="close-match-badge" style={{ marginLeft: 8, fontSize: '9px', padding: '2px 7px' }}>
+                ⚠ Parejo
+              </span>
+            )}
           </div>
           <div className="fixture-meta">
             <span className="league-name">{p.league}</span>
@@ -233,7 +244,7 @@ function PredictionCard({ prediction: p, onDelete }) {
           {(homeProb || drawProb || awayProb) > 0 && (
             <div className="history-probs">
               <MiniBar label={p.home_team} value={homeProb} type="home-hist" />
-              <MiniBar label="Empate"      value={drawProb} type="draw-hist" />
+              <MiniBar label="Empate"      value={drawProb} type="draw-hist" viable={drawIsViable} />
               <MiniBar label={p.away_team} value={awayProb} type="away-hist" />
             </div>
           )}
@@ -305,6 +316,14 @@ function PredictionCard({ prediction: p, onDelete }) {
             compact
           />
         )}
+        {closeWarning && (
+          <p className="analysis-warning" role="alert" style={{ margin: '10px 0 0' }}>
+            {closeWarning.message}
+          </p>
+        )}
+        {notes.map((note, i) => (
+          <p key={i} className="analysis-note" style={{ margin: '6px 0 0' }}>{note}</p>
+        ))}
       </div>
     </div>
   )
@@ -328,14 +347,17 @@ function ProbDonut({ value, isCorrect }) {
   )
 }
 
-function MiniBar({ label, value, type }) {
+function MiniBar({ label, value, type, viable }) {
   return (
-    <div className="mini-bar-row">
+    <div className={`mini-bar-row${viable ? ' viable' : ''}`}>
       <span className="mini-bar-label">{label.length > 10 ? label.slice(0, 9) + '…' : label}</span>
       <div className="prob-track" style={{ height: 5 }}>
         <div className={`prob-fill ${type}`} style={{ width: `${value}%` }} />
       </div>
-      <span className={`prob-pct ${type}`} style={{ fontSize: '0.7rem' }}>{value.toFixed(1)}%</span>
+      <span className={`prob-pct ${type}`} style={{ fontSize: '0.7rem' }}>
+        {value.toFixed(1)}%
+        {viable && <span className="viable-mark" aria-label="empate viable">↑</span>}
+      </span>
     </div>
   )
 }
