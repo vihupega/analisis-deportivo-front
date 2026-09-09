@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
 import MatchStatsSection from './MatchStatsSection.jsx'
+import ProbBars from './ProbBars.jsx'
 
 export default function ProbabilityResult({ result }) {
   const p = result.probabilities
@@ -39,27 +39,15 @@ export default function ProbabilityResult({ result }) {
         <span className="league-label">{result.league} · {result.date}</span>
       </div>
 
-      <div className="prob-bars">
-        <ProbRow
-          label={result.home_team}
-          value={home}
-          type="home"
-          isWinner={!isCloseMatch && winner === 'home'}
-        />
-        <ProbRow
-          label="Empate"
-          value={draw}
-          type="draw"
-          isWinner={!isCloseMatch && winner === 'draw'}
-          isViable={drawIsViable && winner !== 'draw'}
-        />
-        <ProbRow
-          label={result.away_team}
-          value={away}
-          type="away"
-          isWinner={!isCloseMatch && winner === 'away'}
-        />
-      </div>
+      <ProbBars
+        homeLabel={result.home_team}
+        awayLabel={result.away_team}
+        home={home}
+        draw={draw}
+        away={away}
+        winner={isCloseMatch ? null : winner}
+        drawViable={drawIsViable}
+      />
 
       {closeWarning && (
         <p className="analysis-warning" role="alert">
@@ -82,33 +70,6 @@ export default function ProbabilityResult({ result }) {
           awayTeam={result.away_team}
         />
       )}
-    </div>
-  )
-}
-
-function ProbRow({ label, value, type, isWinner, isViable }) {
-  const [width, setWidth] = useState(0)
-
-  useEffect(() => {
-    const id = requestAnimationFrame(() => setWidth(value))
-    return () => cancelAnimationFrame(id)
-  }, [value])
-
-  const classes = ['prob-row', isWinner && 'winner', isViable && 'viable']
-    .filter(Boolean).join(' ')
-
-  return (
-    <div className={classes}>
-      <span className="prob-label" title={label}>
-        {label.length > 12 ? label.slice(0, 11) + '…' : label}
-      </span>
-      <div className="prob-track">
-        <div className={`prob-fill ${type}`} style={{ width: `${width}%` }} />
-      </div>
-      <span className={`prob-pct ${type}`}>
-        {value.toFixed(1)}%
-        {isViable && <span className="viable-mark" aria-label="empate viable">↑</span>}
-      </span>
     </div>
   )
 }

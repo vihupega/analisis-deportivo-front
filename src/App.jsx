@@ -4,13 +4,15 @@ import PredictTab from './components/PredictTab.jsx'
 import PredictWCTab from './components/PredictWCTab.jsx'
 import AdminTab from './components/AdminTab.jsx'
 import HistoryTab from './components/HistoryTab.jsx'
+import QuinielasTab from './components/quinielas/QuinielasTab.jsx'
 
 const TABS = [
-  { id: 'fixtures', label: 'Fixtures',   icon: '📅', mode: 'mode-fix'   },
-  { id: 'predict',  label: 'Predecir',   icon: '⚽', mode: 'mode-club'  },
-  { id: 'wc',       label: 'Mundial',    icon: '🏆', mode: 'mode-intl'  },
-  { id: 'history',  label: 'Historial',  icon: '📋', mode: 'mode-hist'  },
-  { id: 'admin',    label: 'Admin',      icon: '⚙', mode: 'mode-admin' },
+  { id: 'fixtures',  label: 'Fixtures',   icon: '📅', mode: 'mode-fix'   },
+  { id: 'predict',   label: 'Predecir',   icon: '⚽', mode: 'mode-club'  },
+  { id: 'wc',        label: 'Mundial',    icon: '🏆', mode: 'mode-intl'  },
+  { id: 'quinielas', label: 'Quinielas',  icon: '🎟', mode: 'mode-quin'  },
+  { id: 'history',   label: 'Historial',  icon: '📋', mode: 'mode-hist'  },
+  { id: 'admin',     label: 'Admin',      icon: '⚙', mode: 'mode-admin' },
 ]
 
 export default function App() {
@@ -58,9 +60,10 @@ export default function App() {
           <FixturesTab onPredict={handlePredict} />
         </div>
         {tab === 'predict'  && <PredictTab   prefill={prefill} onTabChange={setTab} />}
-        {tab === 'wc'       && <PredictWCTab prefill={prefill} onTabChange={setTab} />}
-        {tab === 'history'  && <HistoryTab />}
-        {tab === 'admin'    && <AdminTab />}
+        {tab === 'wc'        && <PredictWCTab prefill={prefill} onTabChange={setTab} />}
+        {tab === 'quinielas' && <QuinielasTab />}
+        {tab === 'history'   && <HistoryTab />}
+        {tab === 'admin'     && <AdminTab />}
       </div>
     </div>
   )

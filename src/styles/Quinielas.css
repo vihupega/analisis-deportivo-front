@@ -1,0 +1,187 @@
+/* ── Sub-navegación Progol / Personalizada ─────────────────── */
+.quin-sub-nav { margin-bottom: 16px; }
+
+/* ── Listado ────────────────────────────────────────────────── */
+.quin-list { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.quin-list-item {
+  background: linear-gradient(180deg, rgba(20,28,50,0.5), rgba(12,17,32,0.6));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: border-color 0.18s;
+}
+.quin-list-item:hover { border-color: var(--line-strong); }
+.quin-list-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--ink-0);
+  margin-bottom: 4px;
+}
+
+/* ── Header de detalle ─────────────────────────────────────── */
+.quin-header-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink-0);
+}
+
+/* ── Tabla de partidos ──────────────────────────────────────── */
+.quin-table-wrap { margin-top: 8px; }
+.quin-seccion + .quin-seccion { margin-top: 20px; }
+.quin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+}
+.quin-table th {
+  color: var(--ink-3);
+  text-align: left;
+  padding: 6px 8px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--line);
+}
+.quin-table td {
+  padding: 8px;
+  border-top: 1px solid var(--line-faint);
+  color: var(--ink-1);
+  vertical-align: middle;
+}
+.quin-row-unmatched td { background: rgba(255, 93, 122, 0.06); }
+.quin-row-edit td { padding: 0; border-top: none; }
+
+.quin-teams { display: flex; align-items: center; gap: 6px; font-family: var(--font-display); }
+.quin-teams .vs { color: var(--ink-3); font-size: 0.7rem; }
+.quin-probs { white-space: nowrap; }
+
+.quin-fix-form {
+  background: rgba(8, 12, 22, 0.5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin: 4px 0 10px;
+}
+.quin-candidatos { margin-bottom: 6px; }
+
+/* ── Resumen de jugadas ─────────────────────────────────────── */
+.quin-resumen { margin-top: 16px; }
+.quin-resumen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 12px 0;
+}
+.quin-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+.quin-kpi-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.quin-kpi-val {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-0);
+}
+
+.quin-prob-compare { margin-top: 16px; }
+.quin-compare-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 52px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+.quin-compare-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-2);
+}
+
+.quin-nota-metodologica {
+  margin-top: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.02);
+  color: var(--ink-3);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  font-family: var(--font-mono);
+}
+
+.quin-optimizar-form { margin-top: 8px; }
+
+/* ── Análisis en curso ──────────────────────────────────────── */
+.quin-analisis-runner { margin-top: 16px; }
+.quin-progress-track {
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.quin-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--c-accent-deep), var(--c-accent));
+  transition: width 0.4s ease;
+}
+.quin-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ── Import panel / custom builder ─────────────────────────── */
+.quin-import-panel, .quin-custom-builder { margin-top: 16px; }
+.quin-json-textarea {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  resize: vertical;
+  min-height: 180px;
+}
+
+.quin-fixture-search { margin: 10px 0 16px; }
+.quin-fixture-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.quin-fixture-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.quin-fixture-item:hover { border-color: var(--line-strong); }
+.quin-fixture-item.checked { border-color: var(--c-accent); background: rgba(74,217,255,0.06); }
+.quin-fixture-item.disabled { opacity: 0.5; cursor: not-allowed; }
+.quin-fixture-teams { font-weight: 600; color: var(--ink-0); }
+
+.quin-selected-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }

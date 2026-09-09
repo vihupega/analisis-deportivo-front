@@ -4,6 +4,7 @@
 .mode-intl  { --c-accent: var(--c-intl);  --c-accent-deep: var(--c-intl-deep);  --c-accent-glow: var(--c-intl-glow);  }
 .mode-admin { --c-accent: var(--c-admin); --c-accent-deep: var(--c-admin-deep); --c-accent-glow: var(--c-admin-glow); }
 .mode-hist  { --c-accent: var(--c-hist);  --c-accent-deep: var(--c-hist-deep);  --c-accent-glow: var(--c-hist-glow);  }
+.mode-quin  { --c-accent: var(--c-quin);  --c-accent-deep: var(--c-quin-deep);  --c-accent-glow: var(--c-quin-glow);  }
 
 /* ── Layout shell ──────────────────────────────────────── */
 .app-shell {
@@ -61,7 +62,7 @@
 /* ── Tabs navigation ───────────────────────────────────── */
 .tabs {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 3px;
   background: rgba(255, 255, 255, 0.03);
   padding: 4px;
@@ -106,3 +107,4 @@
 .tab.mode-intl.active  { background: var(--c-intl);  box-shadow: 0 2px 10px -3px var(--c-intl-glow); }
 .tab.mode-admin.active { background: var(--c-admin); box-shadow: 0 2px 10px -3px var(--c-admin-glow); }
 .tab.mode-hist.active  { background: var(--c-hist);  box-shadow: 0 2px 10px -3px var(--c-hist-glow); }
+.tab.mode-quin.active  { background: var(--c-quin);  box-shadow: 0 2px 10px -3px var(--c-quin-glow); }

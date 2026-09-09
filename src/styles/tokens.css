@@ -45,6 +45,10 @@
   --c-hist-deep: #c49a00;
   --c-hist-glow: rgba(255, 209, 102, 0.22);
 
+  --c-quin: #ff5dc4;
+  --c-quin-deep: #c4238f;
+  --c-quin-glow: rgba(255, 93, 196, 0.22);
+
   --c-ok: #5dffb0;
   --c-warn: #ffc46a;
   --c-bad: #ff5d7a;

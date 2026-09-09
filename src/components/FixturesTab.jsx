@@ -2,6 +2,20 @@ import { useState } from 'react'
 import { api } from '../api.js'
 import { ALL_LEAGUES, isInternational, todayStr } from '../data.js'
 
+function fixtureToPartido(f) {
+  const fecha = f.date?.slice(0, 10)
+  const hora = f.date?.length > 10 ? f.date.slice(11, 16) : undefined
+  return {
+    fixture_id: f.fixture_id,
+    home_team: f.home_team,
+    away_team: f.away_team,
+    league: f.league,
+    league_id: f.league_id,
+    date: fecha,
+    hora,
+  }
+}
+
 export default function FixturesTab({ onPredict }) {
   const [date, setDate]         = useState(todayStr())
   const [league, setLeague]     = useState('')

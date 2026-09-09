@@ -249,6 +249,19 @@ function PredictionCard({ prediction: p, onDelete }) {
             </div>
           )}
 
+          {closeWarning && (
+            <p className="analysis-warning" role="alert" style={{ marginTop: 8 }}>
+              {closeWarning.message}
+            </p>
+          )}
+          {notes.length > 0 && (
+            <div style={{ marginTop: 4 }}>
+              {notes.map((note, i) => (
+                <p key={i} className="analysis-note" style={{ margin: '4px 0 0' }}>{note}</p>
+              ))}
+            </div>
+          )}
+
           {hasStats && (
             <button
               className={`stats-toggle ${showStats ? 'open' : ''}`}
@@ -316,14 +329,6 @@ function PredictionCard({ prediction: p, onDelete }) {
             compact
           />
         )}
-        {closeWarning && (
-          <p className="analysis-warning" role="alert" style={{ margin: '10px 0 0' }}>
-            {closeWarning.message}
-          </p>
-        )}
-        {notes.map((note, i) => (
-          <p key={i} className="analysis-note" style={{ margin: '6px 0 0' }}>{note}</p>
-        ))}
       </div>
     </div>
   )
